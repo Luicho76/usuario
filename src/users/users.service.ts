@@ -46,6 +46,21 @@ export class UsersService {
     return userFound;
   }
 
+  async getByEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+    if (user) {
+      return user;
+    }
+    throw new HttpException(
+      'User with this email does not exist',
+      HttpStatus.NOT_FOUND,
+    );
+  }
+
   async deleteUser(id: number) {
     const result = await this.userRepository.delete({ id });
 

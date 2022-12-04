@@ -25,6 +25,9 @@ export class User {
   @Column({ nullable: true })
   authStrategy: string;
 
+  @Column({ unique: true })
+  email: string;
+
   @OneToOne(() => Profile)
   @JoinColumn()
   profile: Profile;
